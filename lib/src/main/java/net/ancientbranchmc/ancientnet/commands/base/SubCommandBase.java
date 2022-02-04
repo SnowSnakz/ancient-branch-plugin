@@ -19,14 +19,34 @@ public abstract class SubCommandBase {
 	public void registerSubCommand(SubCommandBase cmd) {
 		subCommands.add(cmd);
 	}
+
+	public SubCommandBase getSubCommand(String subCommand) {
+		for(SubCommandBase scb : subCommands) {
+			if(scb.name.equals(subCommand)) {
+				return scb;
+			}
+		}
+
+		return null;
+	}
 	
-	public SubCommandBase usesSubCommand(CommandContext ctx) {
-		SubCommandBase sub = null;
-		
+	public SubCommandBase usesSubCommand(CommandContext ctx, int fromParam) {
+		String[] args = ctx.getPlainArgs();
+
+		if(args.length <= fromParam) {
+			return this;
+		}
+
+		SubCommandBase sub = getSubCommand(args[fromParam]);
+
+		if(sub == null) {
+			return this;
+		}
+
 		return sub;
 	}
 	
-	public void SetParameter(int parameterSlot, CommandParameter param) {
+	public void setParameter(int parameterSlot, CommandParameter param) {
 		boolean invalidIndex = parameterSlot > params.size();
 		invalidIndex |= parameterSlot < 0;
 		

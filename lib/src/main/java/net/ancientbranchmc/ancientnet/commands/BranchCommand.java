@@ -3,6 +3,12 @@ package net.ancientbranchmc.ancientnet.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.ancientbranchmc.ancientnet.commands.base.CommandContext;
+import net.ancientbranchmc.ancientnet.commands.base.CommandResult;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.Style;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,11 +20,8 @@ import net.ancientbranchmc.ancientnet.AncientNetPlugin;
 import net.ancientbranchmc.ancientnet.commands.base.CommandBase;
 
 public class BranchCommand extends CommandBase {
-	private AncientNetPlugin pl;
-	
 	public BranchCommand(AncientNetPlugin plugin) {
-		super();
-		pl = plugin;
+		super(plugin, "ab-lib.commands.branch.see");
 	}
 	
 	public void reload() {
@@ -30,5 +33,14 @@ public class BranchCommand extends CommandBase {
 			List<String> suggestions) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public CommandResult execute(CommandContext context) {
+		return new CommandResult(context).message(
+				Component.text("Hello, use ", Style.style(TextColor.color(97, 70, 179)))
+						.append(Component.text("/branch help", Style.style(TextColor.color(0, 222, 174), TextDecoration.UNDERLINED)))
+						.append(Component.text(" to get started!", Style.style(TextColor.color(97, 70, 179))))
+			);
 	}
 }

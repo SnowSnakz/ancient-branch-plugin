@@ -10,14 +10,24 @@ public class CommandContext {
 	private Player playerSender;
 	
 	private String[] parameters;
-	
+
+	private int executingCommandStart;
 	private CommandBase topLevelCommand;
 	private SubCommandBase executingCommand;
 	
 	public CommandContext(CommandSender sender, String[] params, CommandBase tlc) {
 		topLevelCommand = tlc;
 		executingCommand = tlc;
-		
+
+		SubCommandBase tempCmd = tlc;
+		int i = 0;
+
+		while(executingCommand != (tempCmd = tempCmd.getSubCommand(params[i++]))) {
+			executingCommand = tempCmd;
+		}
+
+		executingCommandStart = i - 1;
+
 		parameters = params;
 		
 		genericSender = sender;
@@ -30,15 +40,23 @@ public class CommandContext {
 			consoleSender = (ConsoleCommandSender)sender;
 		}
  	}
-	
-	public CommandResult evaluate() {
-		CommandResult result = new CommandResult(this);
-		
-		
-		
-		return result;
+
+	public String[] getPlainArgs() {
+		return parameters.clone();
 	}
-	
+
+	public CommandBase getTopLevelCommand() {
+		return topLevelCommand;
+	}
+
+	public SubCommandBase getExecutingCommand() {
+		return executingCommand;
+	}
+
+	public int getSubCommandArgIndex() {
+		return executingCommandStart;
+	}
+
 	public boolean senderIsConsole() {
 		return consoleSender != null;
 	}
