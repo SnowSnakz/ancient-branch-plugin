@@ -54,5 +54,8 @@ public class ShopItem extends DatabaseItem {
     @DatabaseColumn(name = "igc_sale_multiplier", type = double.class)
     private String inGameIconNbt;
 
-    
+    @Override
+    protected String getKeyValue() {
+        return Integer.toString(itemId);
+    }
 }
