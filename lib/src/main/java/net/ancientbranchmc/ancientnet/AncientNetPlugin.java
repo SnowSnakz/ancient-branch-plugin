@@ -30,11 +30,8 @@ public class AncientNetPlugin extends JavaPlugin {
 
 	private Logger databaseItemLogger;
 	private Logger playerProfileLogger;
-
-	private String dbHost;
-	private String dbUser;
-	private String dbPass;
-	private int dbPort;
+	private Logger configLogger;
+	private Logger commandLogger;
 
 	public Logger getDatabaseItemLogger(DatabaseItem item) {
 		if(item != null) {
@@ -43,6 +40,14 @@ public class AncientNetPlugin extends JavaPlugin {
 		}
 
 		return null;
+	}
+
+	public Logger getConfigLogger() {
+		return configLogger;
+	}
+
+	public Logger getCommandLogger() {
+		return commandLogger;
 	}
 
 	public Logger getPlayerProfileLogger() {
@@ -68,20 +73,28 @@ public class AncientNetPlugin extends JavaPlugin {
 		// 'cfg' variable for easier reference.
 		FileConfiguration cfg = getConfig();
 
+		/*
 		// Load database stuff
 		dbHost = cfg.getString("mysql.host");
 		dbPort = cfg.getInt("mysql.host");
 		dbUser = cfg.getString("mysql.username");
 		dbPass = cfg.getString("mysql.password");
-		
+		*/
 	}
 	
 	@Override
 	public void onEnable() {
-		databaseItemLogger = Logger.getLogger("DatabaseItem");
-		playerProfileLogger = Logger.getLogger("PlayerProfiles");
+		databaseItemLogger = Logger.getLogger("AB-Databases");
+		playerProfileLogger = Logger.getLogger("AB-Profiles");
+		configLogger = Logger.getLogger("AB-Configuration");
+		commandLogger = Logger.getLogger("AB-Commands");
 
-		// In this scenario, the name is misleading... Using it here loads everything, *for the first time*!
+		// Create Commands
+		branchCommand = new BranchCommand(this);
+		friendCommand = new FriendCommand(this);
+		reportCommand = new ReportCommand(this);
+
+		// Load the config
 		reloadEverything();
 	}
 }

@@ -34,9 +34,8 @@ public abstract class DatabaseItem {
 			throw new MissingAnnotationException(FromTable.class.getName(), "This is required to know which table to take the data from, and to know which column is the primary key.");
 		}
 
-		try(Connection connection = pl.connectToSQL()) {
+		try(Connection connection = pl.connectToDatabase("mother-tree")) {
 			PreparedStatement stmt = connection.prepareStatement("select * from ? where `?` = '?'");
-
 
 			stmt.setString(1, ft.table());
 			stmt.setString(2, ft.primaryKey());
@@ -44,6 +43,7 @@ public abstract class DatabaseItem {
 
 			ResultSet results = stmt.executeQuery();
 
+			Logger log = pl.getDatabaseItemLogger(this);
 
 			for(Field field : myClass.getDeclaredFields()) {
 				DatabaseColumn ann = field.getAnnotation(DatabaseColumn.class);
@@ -62,10 +62,24 @@ public abstract class DatabaseItem {
 								field.set(this, obj);
 							}
 							catch(Exception ex) {
-								Logger log = pl.getDatabaseItemLogger(this);
+								if(ex instanceof IllegalAccessException) {
+									log.log(Level.SEVERE, "Unable to access field: '" + field.getName() + "'");
+									log.log(Level.SEVERE, "Attempting to retry by giving access through reflections.");
 
-								log.log(Level.SEVERE, "Failed to load data into field '" + field.getName() + "', see stacktrace below.");
-								ex.printStackTrace();
+									try {
+										field.setAccessible(true);
+										field.set(this, obj);
+									}
+									catch(Exception ex2) {
+										log.log(Level.SEVERE, "Failed to load data into field '" + field.getName() + "', see stacktrace below.");
+										ex2.printStackTrace();
+									}
+								}
+								else {
+
+									log.log(Level.SEVERE, "Failed to load data into field '" + field.getName() + "', see stacktrace below.");
+									ex.printStackTrace();
+								}
 							}
 						}
 					}

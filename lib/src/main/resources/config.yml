@@ -1,7 +1,7 @@
-mysql:
-   host: localhost
-   port: 3306
-   database: mtree
-   username: luckperms
-   password: '-[R[b]A]4RuRb@]/'''
-   
+databases:
+   mother-tree:
+      host: localhost
+      port: 3306
+      database: mtree
+      username: someordinaryuser
+      password: averysecurepasswordlol
