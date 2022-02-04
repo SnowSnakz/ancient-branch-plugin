@@ -1,0 +1,15 @@
+main: net.ancientbranchmc.ancientnet.AncientNetPlugin
+name: AncientNetwork
+version: 1.0.0
+api-version: 1.18
+author: WoofHybrid
+website: www.ancientbranchmc.net
+depend: [Vault]
+commands:
+   branch:
+   report:
+   friend:
+permissions:
+   mtree.commands.branch:
+   mtree.commands.report:
+   mtree.commands.friend:
