@@ -34,9 +34,9 @@ public class AncientNetPlayer {
 			profile.fillData();
 		}
 		catch (SQLException e) {
+			logger.log(Level.SEVERE, "Unable to load profile for player " + plr.getName() + ": \n" + e.getMessage());
 			e.printStackTrace();
 		} catch (MissingAnnotationException e) {
-			logger.log(Level.SEVERE, "Unable to load profile for player " + plr.getName() + ": \n" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
