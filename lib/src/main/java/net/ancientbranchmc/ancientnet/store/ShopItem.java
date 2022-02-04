@@ -49,10 +49,10 @@ public class ShopItem extends DatabaseItem {
     private double saleMultiplierForInGameCurrency;
 
     @DatabaseColumn(name = "igc_sale_multiplier", type = double.class)
-    private String inGameIcon;
+    private double inGameIcon;
 
     @DatabaseColumn(name = "igc_sale_multiplier", type = double.class)
-    private String inGameIconNbt;
+    private double inGameIconNbt;
 
     @Override
     protected String getKeyValue() {
