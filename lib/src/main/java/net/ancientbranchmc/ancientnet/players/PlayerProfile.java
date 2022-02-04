@@ -10,10 +10,10 @@ import org.bukkit.OfflinePlayer;
 import net.ancientbranchmc.ancientnet.AncientNetPlugin;
 import net.ancientbranchmc.ancientnet.api.DatabaseItem;
 
-@FromTable(database = "mtree", table = "global_player_profiles", primaryKey = "internalId")
+@FromTable(database = "mtree", table = "global_player_profiles", primaryKey = "internal_id")
 public class PlayerProfile extends DatabaseItem {
 
-	@DatabaseColumn(name = "internalId")
+	@DatabaseColumn(name = "internal_id")
 	protected int id;
 
 	@DatabaseColumn(name = "uuid")
