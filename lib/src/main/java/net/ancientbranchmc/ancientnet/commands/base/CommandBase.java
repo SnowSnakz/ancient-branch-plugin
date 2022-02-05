@@ -14,6 +14,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -101,5 +102,6 @@ public abstract class CommandBase extends SubCommandBase implements CommandExecu
 		// Signify the command exists and has executed.
 		return true;
 	}
-	
+
+	public abstract void reloadFromConfig();
 }

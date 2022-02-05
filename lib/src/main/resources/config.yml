@@ -1,7 +1,61 @@
+# The database functionality uses MySQL
 databases:
    mother-tree:
       host: localhost
       port: 3306
-      database: mtree
+      database: thenameofadatabase
       username: someordinaryuser
       password: averysecurepasswordlol
+
+block-namespaced-commands: true
+block-plugin-list-command: true
+
+# Messages that are shown whenever certain events or actions are performed.
+messages:
+   # A message that is sent to the specific player whenever the log into the server
+   player-join-message:
+      first: # The message to display if it is the first time they are logging into the server.
+         - '{"text":"Hello, ","color":"#2a5dc9","bold":false}'
+         - '{"text":"%player%","color":"#00ffb7","bold":true}'
+         - '{"text":"!\n","color":"#2a5dc9","bold":false}'
+         - '{"text":"Welcome to ","color":"#4d289c","italic":true}'
+         - '{"text":"THE ANCIENT BRANCH","color":"#26ffcc","bold":true,"italic":false}'
+         - '{"text":"!\n","color":"#4d289c","bold":false,"italic":true}'
+         - '{"text":"Please read the ","color":"#604687","bold":false,"italic":false}'
+         - '{"text":"/rules","color":"#3e2ca3","underline":true,"clickEvent":{"action":"run_command","value":"/rules"},"hoverEvent":{"action":"show_text","value":"Click here to show the rules."}}'
+         - '{"text":", and finally, enjoy your stay! :)","color":"#604687","underline":false}'
+
+      not-first: # The message to display if it is not the first time they are logging into the server.
+         - '{"text":"Hello, ","color":"#2a5dc9","bold":false}'
+         - '{"text":"%player%","color":"#00ffb7","bold":true}'
+         - '{"text":"! Welcome back!","color":"#2a5dc9","bold":false}'
+
+   # The message to display to the rest of the server whenever a player logs in.
+   server-join-message:
+      first: # The message to display if it is the first time the player is logging into the server.
+         - '{"text":"Please welcome ","color":"#2a5dc9","bold":false}'
+         - '{"text":"%player% ","color":"#00ffb7","bold":true}'
+         - '{"text":"to the server!","color":"#2a5dc9","bold":false}'
+
+      not-first: # The message to display if it is not first time the player is logging into the server.
+         - '{"text":"%player%","color":"#00ffb7","bold":true}'
+         - '{"text":" joined the server, ","color":"#2a5dc9","bold":false}'
+         - '{"text":"welcome back!","color":"#2a5dc9","bold":false,"underline":true,"clickEvent":{"action":"suggest_command","value":"Welcome back, %player%"},"hoverEvent":{"action":"show_text","value":"Click here to automagically type a welcome back message."}}'
+
+   reload-started:
+      - '{"text":"Reloading from the config file...","color":"#808080"}'
+      -
+   no-permission:
+      - '{"text":"You do not have permission to use this command.","color":"#872e2e"}'
+
+   reload-completed:
+      - '{"text":"Reload was successful!","color":"#7ad166"}'
+
+   reload-failed:
+      - '{"text":"Reload failed! Please refer to the console for more details.","color":"#ab2922"}'
+
+   blocked-plugin-list:
+      - '{"text":"We can''t show you what plugins we use, only because some plugins might contain vulnerabilities or exploits that we do not want to players to easily know of or use.","color":"#ab2922"}'
+
+   blocked-namespaced-command:
+      - '{"text":"Attempting to perform a command from a specific namespace is not allowed.","color":"#ab2922"}'

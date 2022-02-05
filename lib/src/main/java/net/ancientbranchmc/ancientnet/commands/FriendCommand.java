@@ -13,6 +13,10 @@ public class FriendCommand extends CommandBase {
         super(plugin, "ab-lib.commands.friends.see");
     }
 
+    public void reloadFromConfig() {
+
+    }
+
     @Override
     public void populateTabCompleteSuggestions(int parameterIndex, String[] args, String partialArg, List<String> suggestions) {
 

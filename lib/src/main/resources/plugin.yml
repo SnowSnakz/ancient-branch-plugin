@@ -4,12 +4,12 @@ version: 1.0.0
 api-version: 1.18
 author: WoofHybrid
 website: www.ancientbranchmc.net
-depend: [Vault]
+depend: [Vault, PlaceholderAPI, WorldEdit]
 commands:
-   branch:
-   report:
-   friend:
 permissions:
-   mtree.commands.branch:
-   mtree.commands.report:
-   mtree.commands.friend:
+   ancientbranch.bypass.blockpluginlist:
+      default: op
+      description: 'Anyone with this permission can use /pl (or /plugins) to see the plugin list.'
+   ancientbranch.bypass.blocknamespacedcommands:
+      default: op
+      description: 'Anyone with this permission is allowed to use namespaced commands ("/namespace:command"), for example: "/minecraft:tell"'

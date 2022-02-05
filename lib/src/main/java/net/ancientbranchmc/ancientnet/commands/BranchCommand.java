@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.ancientbranchmc.ancientnet.commands.base.CommandContext;
 import net.ancientbranchmc.ancientnet.commands.base.CommandResult;
+import net.ancientbranchmc.ancientnet.commands.subcommands.branch.ReloadCommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
@@ -13,6 +14,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,9 +25,11 @@ public class BranchCommand extends CommandBase {
 	public BranchCommand(AncientNetPlugin plugin) {
 		super(plugin, "ab-lib.commands.branch.see");
 	}
+
+	ReloadCommand reload;
 	
-	public void reload() {
-		
+	public void reloadFromConfig() {
+
 	}
 
 	@Override

@@ -13,6 +13,10 @@ public class ReportCommand extends CommandBase {
         super(plugin, "ab-lib.commands.report.see");
     }
 
+    public void reloadFromConfig() {
+
+    }
+
     @Override
     public void populateTabCompleteSuggestions(int parameterIndex, String[] args, String partialArg, List<String> suggestions) {
 
