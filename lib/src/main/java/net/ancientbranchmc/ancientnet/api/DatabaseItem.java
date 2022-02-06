@@ -1,14 +1,12 @@
 package net.ancientbranchmc.ancientnet.api;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.sun.jdi.InvalidTypeException;
 import net.ancientbranchmc.ancientnet.exceptions.MissingAnnotationException;
 import org.apache.commons.lang.NullArgumentException;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,7 +22,7 @@ public abstract class DatabaseItem {
 		pl = JavaPlugin.getPlugin(AncientNetPlugin.class);
 	}
 
-	public void updateData() throws SQLException, NullArgumentException, MissingAnnotationException, IllegalAccessException, InvalidTypeException {
+	public void updateData() throws SQLException, NullArgumentException, MissingAnnotationException, IllegalAccessException, UnsupportedOperationException {
 		Class<?> myClass = getClass();
 
 		FromTable ft = myClass.getAnnotation(FromTable.class);
@@ -91,7 +89,7 @@ public abstract class DatabaseItem {
 					stmt.setBlob(i, (Blob)field.getKey().get(this));
 					break;
 				default:
-					throw new InvalidTypeException("DatabaseDataType." + field.getValue().name() + " is not supported at this time.");
+					throw new UnsupportedOperationException("DatabaseDataType." + field.getValue().name() + " is not supported at this time.");
 			}
 
 			i++;
