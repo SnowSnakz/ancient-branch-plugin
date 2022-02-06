@@ -6,5 +6,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DatabaseColumn {
 	String name() default "";
-	Class type() default Object.class;
+	DatabaseDataType type() default DatabaseDataType.String;
 }
